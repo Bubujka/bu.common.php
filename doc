@@ -1,7 +1,17 @@
 #!/usr/bin/env php
 <?php
 require_once 'load.php';
-$match = (!isset($argv[1])) ? '/.*/iu' : '/'.$argv[1].'/iu';
-foreach(docs() as $k=>$v)
-        if(preg_match($match, $k))
-                echo $k.":\n"."   ".implode("\n   ", explode("\n", trim($v)))."\n\n";
+def_return('bu\aux\match', (!isset($argv[1])) ? '/.*/iu' : '/'.$argv[1].'/iu');
+foreach(docs() as $k=>$v){
+        if($t = ob(function() use($v){
+                foreach($v['fns'] as $kk=>$vv)
+                        if(preg_match(bu\aux\match(), $kk))
+                                echo '   '.$kk.":\n"."      ".implode("\n      ", explode("\n", trim($vv)))."\n\n";
+        })){
+                echo $k;
+                if($it = $v['doc'])
+                        echo " - ".$it;
+                echo "\n";
+                echo $t;
+        }
+}
