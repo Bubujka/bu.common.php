@@ -1,0 +1,3 @@
+[submodule "bu.defun"]
+	path = bu.defun
+	url = git://github.com/Bubujka/bu.defun.git
