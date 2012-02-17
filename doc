@@ -1,0 +1,7 @@
+#!/usr/bin/env php
+<?php
+require_once 'load.php';
+$match = (!isset($argv[1])) ? '/.*/iu' : '/'.$argv[1].'/iu';
+foreach(docs() as $k=>$v)
+        if(preg_match($match, $k))
+                echo $k.":\n"."   ".implode("\n   ", explode("\n", trim($v)))."\n\n";
