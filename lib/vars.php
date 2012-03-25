@@ -36,3 +36,10 @@ def('ip', function(){
                 return $_SERVER['REMOTE_ADDR'];
 });
 
+
+doc('вернёт строку запроса');
+def('request_uri', function(){
+        if(isset($_SERVER['REQUEST_URI']))
+                return $_SERVER['REQUEST_URI'];
+});
+
