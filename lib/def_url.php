@@ -17,11 +17,12 @@ doc('функция для определения контроллеров');
 def('def_url', function($name, $fn){
         def($name, $fn);
         $url_fn = $name.'_url';
-        def($url_fn, function() use($name){
-                return '/'.$name;
+        def($url_fn, function($get_args = array()) use($name){
+                $t = ($get_args) ? '?'.http_build_query($get_args) : '';
+                return '/'.$name.$t;
         });
-        def($name.'_link', function($text) use($url_fn){
-                return sprintf('<a href="%s">%s</a>', $url_fn(), $text);
+        def($name.'_link', function($text, $get_args = array()) use($url_fn){
+                return sprintf('<a href="%s">%s</a>', $url_fn($get_args), $text);
         });
         def('redirect_to_'.$name, function() use($url_fn){
                 redirect($url_fn());
