@@ -27,7 +27,18 @@ def('def_url', function($name, $fn){
                 redirect($url_fn());
         });
 
+        def($name.'_post_form', function($data, $button = null) use($url_fn){
+                if(is_closure($data))
+                        $data = ob($data);
+                echo '<form action="'.$url_fn().'" method=post>';
+                        echo $data;
+                if(!is_null($button))
+                echo '<input type="submit" value="'.$button.'">';
+                echo '</form>';
+        });
+
         $t = aux\controllers();
         $t[$name] = array('url' => $name, 'name'=>$name, 'fn_name'=>$name, 'fn'=>$fn);
+        aux\controllers($t);
 });
 
