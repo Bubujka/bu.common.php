@@ -24,8 +24,9 @@ def('def_url', function($name, $fn){
         def($name.'_link', function($text, $get_args = array()) use($url_fn){
                 return sprintf('<a href="%s">%s</a>', $url_fn($get_args), $text);
         });
-        def('redirect_to_'.$name, function() use($url_fn){
-                redirect($url_fn());
+        def('redirect_to_'.$name, function($args = null) use($url_fn){
+                $url = is_null($args) ? $url_fn() : $url_fn().'?'.http_build_query($args);
+                redirect($url);
         });
 
         def($name.'_post_form', function($data, $button = null) use($url_fn){
