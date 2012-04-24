@@ -38,13 +38,20 @@ def('def_url', function($name, $fn){
                 echo '</form>';
         });
 
+        def($name.'_get_button', function($name, $data=array()) use($url_fn){
+                echo '<form action="'.$url_fn().'" method=get class=get-button>';
+                foreach($data as $k=>$v)
+                        printf("<input type='hidden' name='%s' value='%s'>", $k, $v);
+                echo '<input type="submit" value="'.$name.'">';
+                echo '</form>';
+        });
+
         def($name.'_post_button', function($name, $data=array()) use($url_fn){
                 echo '<form action="'.$url_fn().'" method=post class=post-button>';
                 foreach($data as $k=>$v)
                         printf("<input type='hidden' name='%s' value='%s'>", $k, $v);
                 echo '<input type="submit" value="'.$name.'">';
                 echo '</form>';
-
         });
 
         $t = aux\controllers();
