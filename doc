@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+require_once 'vendor/autoload.php';
 require_once 'load.php';
 def_return('bu\aux\match', (!isset($argv[1])) ? '/.*/iu' : '/'.$argv[1].'/iu');
 
