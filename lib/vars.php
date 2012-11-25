@@ -22,6 +22,14 @@ def('post', function($arg = null){
     return $_POST[$arg];
 });
 
+doc('если вызвана без аргументов - вернёт $_COOKIE массив.
+  С аргументом - значение этого ключа в массиве или null');
+def('cookie', function($arg = null){
+  if(!func_num_args())
+    return $_COOKIE;
+  if(isset($_COOKIE[$arg]))
+    return $_COOKIE[$arg];
+});
 
 doc('вернёт адрес хоста или null');
 def('http_host', function(){

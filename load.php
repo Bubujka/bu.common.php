@@ -1,4 +1,5 @@
 <?php
+require_once 'opt/phamlp/haml/HamlParser.php';
 require_once 'lib/doc.php';
 require_once 'lib/require.php';
 require_glob(__DIR__.'/lib/*.php');
