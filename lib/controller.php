@@ -85,6 +85,35 @@ def('controller', function($name, $fn){
     echo '<input type="submit" value="'.$name.'">';
     echo '</form>';
   });
-
 });
 
+doc('Функция для определения контроллеров администратора');
+def('admin_controller', function($nm, $fn){
+  controller($nm, function()use($fn){
+    if(is_admin())
+      return $fn();
+    else
+      redirect(admin_auth_url());
+  });
+});
+
+doc('Функция для определения контроллеров администратора, обёрнутых в лайаут');
+def('admin_layout_controller', function($nm, $fn){
+  controller($nm, function() use($fn){
+    if(is_admin()){
+      layout('admin');
+      $data = ob($fn);
+      echo dview('layout/'.layout(), $data);
+    }else
+      redirect(admin_auth_url());
+  });
+});
+
+doc('Функция для определения контроллеров обёрнутых в лайаут');
+def('layout_controller', function($nm, $fn){
+  controller($nm, function() use($fn){
+    layout('default');
+    $data = ob($fn);
+    echo dview('layout/'.layout(), $data);
+  });
+});

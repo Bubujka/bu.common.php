@@ -1,6 +1,7 @@
 <?php
 doc_group('view', 'функции для работы с шаблонами');
-
+doc('Аксессор для установки лайаута');
+def_accessor('layout', 'default');
 def('parse_haml', function($pth){
   $haml = new HamlParser();
   return $xhtml = $haml->parse($pth);
