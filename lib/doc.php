@@ -26,6 +26,30 @@ def('wrap_def_with_doc_wrapper', function(){
     return $fn();
   });
 });
+def_accessor('defining_functions',
+  array(
+    'layout_controller', 'controller', 
+    'def_accessor', 'def', 'def_return',
+    'def_memo', 'defmd', 'def_antonyms', 'deffc',
+  ));
+def('wrap_def_with_doc_backtrace', function(){
+  with_wrapper('def', function($fn){
+    $t = docs();
+    $dbt = debug_backtrace();
+    $def_fns = defining_functions();
+    foreach($def_fns as $fn_name)
+      foreach($dbt as $v)
+        if($v['function'] == $fn_name){
+          $trace = $v;
+          goto finished;
+        }
+finished:
+    $t[doc_group_name()]['fns'][$fn->args[0]]['line'] = $trace['line'];
+    $t[doc_group_name()]['fns'][$fn->args[0]]['file'] = $trace['file'];
+    docs($t);
+    return $fn();
+  });
+});
 
 
 
@@ -64,6 +88,7 @@ def('wrap_def_with_doc_params_wrapper', function(){
 def('wrap_def_with_doc', function(){
   wrap_def_with_doc_wrapper();
   wrap_def_with_doc_params_wrapper();
+  wrap_def_with_doc_backtrace();
 });
 doc_group('doc', 'функции для документирования');
 
