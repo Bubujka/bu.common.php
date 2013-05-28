@@ -16,8 +16,7 @@ def('not_a_url_fn', function($url){
 doc('Запустить сайт');
 def('run_site', function(){
   if(is_dev_host()){
-    wrap_def_with_doc_wrapper();
-    wrap_def_with_doc_params_wrapper();
+    wrap_def_with_doc();
     ini_set('display_errors', 1); 
     error_reporting(E_ALL);
   }else{

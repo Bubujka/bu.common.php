@@ -61,7 +61,10 @@ def('wrap_def_with_doc_params_wrapper', function(){
   });
 });
 
-
+def('wrap_def_with_doc', function(){
+  wrap_def_with_doc_wrapper();
+  wrap_def_with_doc_params_wrapper();
+});
 doc_group('doc', 'функции для документирования');
 
 doc_fn('doc_fn', 'записать документацию по функции.');
